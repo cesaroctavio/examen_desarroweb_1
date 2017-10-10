@@ -6,6 +6,8 @@ from django.db import models
 # Create your models here.
 from django.utils import timezone
 
+from django.conf import settings
+
 class libro(models.Model):
     titulo = models.CharField(max_length=100)
     autor = models.CharField(max_length=50)

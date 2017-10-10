@@ -118,7 +118,7 @@ USE_TZ = True
 STATIC_URL = '/s-storage/'
 
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, "biblioteca/s-storage"),
+    os.path.join(BASE_DIR, "s-storage"),
 ]
 
 #STATIC_ROOT = os.path.join(os.path.dirname(BASE_DIR), "static-serve"))

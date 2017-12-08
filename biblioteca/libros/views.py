@@ -15,6 +15,19 @@ from django.db.models import Q
 
 from django.conf import settings
 # Create your views here.
+def home_libros(request):
+    print request
+    titulo = "libro"
+    return render(request, "libros/home_libros.html", {"Titulo" : titulo})
+
+
+
+def detalle_libro(request, id=10):
+    result_set = libro.objects.get(id=id)
+    context = {
+    "result": result_set
+    }
+    return render(request, "libros/detalle_libro.html", context)
 
 class LibroCreateView(FormUserNeededMixin, CreateView):
     form_class = LibroModelForm
@@ -52,18 +65,3 @@ class LibroListView(ListView):
          context['create_form'] = LibroModelForm()
          context['create_url'] = reverse_lazy("Libro_create")
          return context
-
-
-def home_libros(request):
-    print request
-    titulo = "libro"
-    return render(request, "libros/home_libros.html", {"Titulo" : titulo})
-
-
-
-def detalle_libro(request, id=10):
-    result_set = libro.objects.get(id=id)
-    context = {
-    "result": result_set
-    }
-    return render(request, "libros/detalle_libro.html", context)

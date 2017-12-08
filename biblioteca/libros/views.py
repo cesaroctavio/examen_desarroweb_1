@@ -20,14 +20,17 @@ def home_libros(request):
     titulo = "libro"
     return render(request, "libros/home_libros.html", {"Titulo" : titulo})
 
-
-
 def detalle_libro(request, id=10):
     result_set = libro.objects.get(id=id)
     context = {
     "result": result_set
     }
     return render(request, "libros/detalle_libro.html", context)
+
+def lista_libros(request):
+    result_set = Libros.objects.all()
+    context = {"result": result_set}
+    return render(request, "libros/libro_list_ajax.html", context)
 
 class LibroCreateView(FormUserNeededMixin, CreateView):
     form_class = LibroModelForm
@@ -47,7 +50,7 @@ class LibroDeleteView(LoginRequiredMixin, DeleteView):
     success_url = reverse_lazy("list")
 
 class LibroListView(ListView):
-    template_name = "libros/lista_libros.html"
+    template_name = "libros/libro_list_ajax.html"
 
     def get_queryset(self, *args, **kwargs):
         qs = libro.objects.all()

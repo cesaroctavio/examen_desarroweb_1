@@ -1,66 +1,20 @@
-{% load static %}
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <link rel="icon" href="../../../../favicon.ico">
-
-    <title>Jumbotron Template for Bootstrap</title>
-
-    <!-- Bootstrap core CSS -->
-    <link href="{% static 'static/bootstrap/css/bootstrap.min.css'%}" rel="stylesheet">
-
-    <!-- Custom styles for this template -->
-    <link href="jumbotron.css" rel="stylesheet">
-  </head>
-
-  <body>
-
-    <!-- Main jumbotron for a primary marketing message or call to action -->
-    <div class="jumbotron">
-      <div class="container">
-        <h1 class="display-3">Acervo literario </h1>
-        <p>Registro de los libros disponibles en la biblioteca del Instituto Tecnologico de Tijuana</p>
-      </div>
-      <hr>
-    </div>
-
-    <div class="container">
-      <!-- Example row of columns -->
-      {%for i in objects%}
+{% extends "libros/base.html"%}
+{%block content%}
+    {% include "libros/Busqueda.html" %}
+    <button class="btn btn-secondary" style="padding: 10px; margin: 10px;"><a class="nav-link1" style='color: black;' href="/libros/create">Registrar Libro nuevo</a></button>
+    <br/>
     <div class="row">
+    {% for object in object_list %}
     <span class="card" style="width: 20rem;">
-    <h3><img data-src="#" alt="{{i.titulo}}"><h3>
+    <img data-src="#" alt="{{object.Nombre}}">
     <div class="card-body">
-    <h4 class="card-title">Autor: {{i.autor}}</h4>
-    <h4 class="card-subtitle mb-2 text-muted">Editorial: {{i.editorial}}</h6>
-    <p class="card-text">Precio: ${{i.precio}} MXN</p>
-    <a class="nav-link1" href="/libros/detalle/{{i.id}}" style="color: black">Detalles del libro</a>
+    <h4 class="card-title">Autor: {{object.autor}}</h4>
+    <h6 class="card-subtitle mb-2 text-muted">Editorial: {{object.editorial}}</h6>
+    <p class="card-text">Precio: ${{object.precio}} MXN</p>
+    <p><a class="nav-link1" href="/libros/detalle/{{object.id}}" style="color: black">Detalles del libro</a></p>
+    <p><a class="nav-link1" href="/libros/detalle/{{object.id}}/delete" style="color: black">Eliminar libro</a></p>
+    <p><a class="nav-link1" href="/libros/detalle/{{object.id}}/edit" style="color: black">Modificar libro</a></p>
     </div>
     </span>
-    </div>
-    <hr>
     {% endfor %}
-
-      <hr>
-
-      <footer>
-        <p>&copy; Company 2017</p>
-      </footer>
-    </div> <!-- /container -->
-
-
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script>window.jQuery || document.write('<script src="../../../../assets/js/vendor/jquery.min.js"><\/script>')</script>
-    <script src="../../../../assets/js/vendor/popper.min.js"></script>
-    <script src="../../../../dist/js/bootstrap.min.js"></script>
-    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-    <script src="../../../../assets/js/ie10-viewport-bug-workaround.js"></script>
-  </body>
-</html>
+{%endblock%}

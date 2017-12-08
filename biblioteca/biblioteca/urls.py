@@ -22,7 +22,7 @@ from libros.api.urls import *
 
 
 from .views import home
-from libros.views import home_libros, detalle_libro
+from libros.views import home_libros, detalle_libro, lista_libros
 from libros.views import LibroCreateView, LibroUpdateView, LibroDeleteView, LibroListView
 
 
@@ -30,17 +30,17 @@ from libros.views import LibroCreateView, LibroUpdateView, LibroDeleteView, Libr
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', home, name='home'),
-    url(r'^libros/lista$', LibroListView.as_view(), name='home'),
-
+    
+    url(r'^libros/lista$', LibroListView.as_view(), name='lista'),
     url(r'^libros/detalle/(?P<id>\d)/$', detalle_libro, name='detail'),
     url(r'^libros/detalle/(?P<id>\d\d)/$', detalle_libro, name='detail'),
 
     url(r'^libros/create$', LibroCreateView.as_view(), name='Libro_create'),
     url(r'^libros/detalle/(?P<pk>\d+)/actualizar/$', LibroUpdateView.as_view(), name='Libro_edit'),
     url(r'^libros/detalle/(?P<pk>\d+)/eliminar/$', LibroDeleteView.as_view(), name='Libro_delete'),
-    url(r'^libros/list$', LibroListView.as_view(), name='Libros_list'),
 
-    url(r'^accounts/profile/$', LibroListView.as_view(), name='Libro_list'),
+
+    url(r'^accounts/profile/$', LibroListView.as_view(), name='lista-login'),
     url(r'^api/libros/', include ('libros.api.urls', namespace = 'libro_api')),
     url(r'^accounts/register/$', UserRegisterView.as_view(), name='register'),
     url(r'^', include('django.contrib.auth.urls')),
